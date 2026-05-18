@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday, Celeste! 🎂</title>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pink: #ff7eb3;
+    --lavender: #c9b8ff;
+    --peach: #ffb347;
+    --mint: #7de8c8;
+    --yellow: #ffe566;
+    --sky: #87ceeb;
+    --white: #fff9ff;
+    --deep: #3a1c5e;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #ffd6ec 0%, #e8d5ff 40%, #d5ecff 80%, #d5ffe8 100%);
+    font-family: 'Nunito', sans-serif;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Custom cursor */
+  #cursor {
+    position: fixed;
+    width: 28px; height: 28px;
+    background: var(--pink);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s, background 0.2s;
+    box-shadow: 0 0 16px var(--pink);
+    mix-blend-mode: multiply;
+  }
+
+  /* Floating balloons */
+  .balloon-container {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .balloon {
+    position: absolute;
+    bottom: -150px;
+    width: 60px; height: 75px;
+    border-radius: 50%;
+    animation: floatUp linear infinite;
+    opacity: 0.8;
+  }
+
+  .balloon::after {
+    content: '';
+    position: absolute;
+    bottom: -20px; left: 50%;
+    transform: translateX(-50%);
+    width: 1.5px; height: 30px;
+    background: rgba(0,0,0,0.2);
+  }
+
+  @keyframes floatUp {
+    0% { transform: translateX(0) rotate(0deg); opacity: 0.8; }
+    25% { transform: translateX(20px) rotate(5deg); }
+    50% { transform: translateX(-10px) rotate(-5deg); }
+    75% { transform: translateX(15px) rotate(3deg); }
+    100% { transform: translateX(0) rotate(0deg) translateY(-110vh); opacity: 0; }
+  }
+
+  /* Sparkle particles */
+  .sparkle {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    animation: sparkleAnim 0.8s ease-out forwards;
+    font-size: 18px;
+  }
+
+  @keyframes sparkleAnim {
+    0% { transform: scale(0) rotate(0deg); opacity: 1; }
+    50% { transform: scale(1.5) rotate(180deg); opacity: 1; }
+    100% { transform: scale(0) rotate(360deg) translateY(-40px); opacity: 0; }
+  }
+
+  /* Main container */
+  .main {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 40px 20px 80px;
+  }
+
+  /* Hero section */
+  .hero {
+    text-align: center;
+    margin-bottom: 40px;
+    animation: heroEntrance 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  @keyframes heroEntrance {
+    from { opacity: 0; transform: translateY(-40px) scale(0.9); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .emoji-top {
+    font-size: 60px;
+    display: block;
+    margin-bottom: 10px;
+    animation: bounce 1.5s ease-in-out infinite;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+
+  h1 {
+    font-family: 'Pacifico', cursive;
+    font-size: clamp(2.4rem, 8vw, 5.5rem);
+    background: linear-gradient(135deg, #ff5fa0, #c060ff, #5ba0ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.1;
+    filter: drop-shadow(0 4px 12px rgba(200, 100, 255, 0.3));
+    animation: shimmer 3s ease-in-out infinite;
+    background-size: 200% 200%;
+  }
+
+  @keyframes shimmer {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  .subtitle {
+    font-size: clamp(1rem, 3vw, 1.4rem);
+    color: var(--deep);
+    font-weight: 700;
+    margin-top: 10px;
+    opacity: 0.75;
+    letter-spacing: 0.05em;
+  }
+
+  /* Cake section */
+  .cake-section {
+    margin: 20px 0 40px;
+    animation: heroEntrance 1s 0.2s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .cake-wrapper {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    transition: transform 0.3s;
+  }
+
+  .cake-wrapper:hover { transform: scale(1.05); }
+
+  .cake-svg { display: block; }
+
+  .candle-flame {
+    transform-origin: center bottom;
+    animation: flicker 0.4s ease-in-out infinite alternate;
+  }
+
+  @keyframes flicker {
+    0% { transform: scaleX(1) scaleY(1) rotate(-2deg); opacity: 1; }
+    100% { transform: scaleX(0.85) scaleY(1.15) rotate(2deg); opacity: 0.85; }
+  }
+
+  .cake-hint {
+    text-align: center;
+    font-size: 0.88rem;
+    color: var(--deep);
+    opacity: 0.6;
+    margin-top: 8px;
+    font-weight: 600;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 0.8; }
+  }
+
+  /* Cards */
+  .cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    max-width: 900px;
+    animation: heroEntrance 1s 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .card {
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+    padding: 28px 24px;
+    width: 260px;
+    text-align: center;
+    border: 2px solid rgba(255,255,255,0.9);
+    box-shadow: 0 8px 32px rgba(180, 100, 255, 0.12), 0 2px 8px rgba(0,0,0,0.05);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 22px;
+    background: linear-gradient(135deg, rgba(255,126,179,0.08), rgba(201,184,255,0.08));
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .card:hover { transform: translateY(-8px) rotate(-1deg); box-shadow: 0 20px 50px rgba(180,100,255,0.2); }
+  .card:hover::before { opacity: 1; }
+
+  .card-icon { font-size: 3rem; margin-bottom: 12px; display: block; }
+  .card-title {
+    font-family: 'Pacifico', cursive;
+    font-size: 1.1rem;
+    color: var(--deep);
+    margin-bottom: 8px;
+  }
+
+  .card-text {
+    font-size: 0.88rem;
+    color: #5a4070;
+    line-height: 1.6;
+    font-weight: 600;
+  }
+
+  /* Message reveal */
+  .message-section {
+    margin-top: 50px;
+    max-width: 650px;
+    text-align: center;
+    animation: heroEntrance 1s 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .message-box {
+    background: rgba(255,255,255,0.75);
+    backdrop-filter: blur(12px);
+    border-radius: 28px;
+    padding: 36px 40px;
+    border: 2px solid rgba(255,200,230,0.6);
+    box-shadow: 0 12px 40px rgba(255,126,179,0.15);
+    position: relative;
+  }
+
+  .message-box h2 {
+    font-family: 'Pacifico', cursive;
+    font-size: 1.6rem;
+    color: var(--deep);
+    margin-bottom: 16px;
+  }
+
+  .message-text {
+    font-size: 1rem;
+    color: #4a2e6a;
+    line-height: 1.8;
+    font-weight: 600;
+  }
+
+  /* Confetti button */
+  .btn-wrap {
+    margin-top: 50px;
+    text-align: center;
+    animation: heroEntrance 1s 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .confetti-btn {
+    background: linear-gradient(135deg, #ff5fa0, #c060ff);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 18px 48px;
+    font-family: 'Pacifico', cursive;
+    font-size: 1.3rem;
+    cursor: pointer;
+    box-shadow: 0 8px 30px rgba(200,80,255,0.35);
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .confetti-btn:hover {
+    transform: scale(1.07) translateY(-3px);
+    box-shadow: 0 16px 40px rgba(200,80,255,0.45);
+  }
+
+  .confetti-btn:active { transform: scale(0.97); }
+
+  .confetti-piece {
+    position: fixed;
+    width: 10px; height: 10px;
+    border-radius: 2px;
+    pointer-events: none;
+    z-index: 9000;
+    animation: confettiFall linear forwards;
+  }
+
+  @keyframes confettiFall {
+    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+  }
+
+  /* Blown candles state */
+  .blown { display: none; }
+  .blown-visible { display: block; }
+
+  /* Stars twinkling */
+  .stars {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .star {
+    position: absolute;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: white;
+    animation: twinkle ease-in-out infinite;
+  }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 0; transform: scale(0.5); }
+    50% { opacity: 1; transform: scale(1); }
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .message-box { padding: 24px 20px; }
+    .card { width: 100%; max-width: 320px; }
+  }
+</style>
+</head>
+<body>
+<div id="cursor"></div>
+<div class="balloon-container" id="balloons"></div>
+<div class="stars" id="stars"></div>
+
+<div class="main">
+  <!-- Hero -->
+  <div class="hero">
+    <span class="emoji-top">🎉</span>
+    <h1>Happy Birthday,<br>Celeste!</h1>
+    <p class="subtitle">✨ Wishing you the most magical day ✨</p>
+  </div>
+
+  <!-- Cake -->
+  <div class="cake-section">
+    <div class="cake-wrapper" id="cakeWrapper" title="Click to blow out the candles!">
+      <svg class="cake-svg" width="220" height="220" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+        <!-- Plate -->
+        <ellipse cx="110" cy="190" rx="95" ry="16" fill="#f0d0f5" opacity="0.7"/>
+        <!-- Bottom tier -->
+        <rect x="30" y="155" width="160" height="38" rx="16" fill="#ff7eb3"/>
+        <ellipse cx="110" cy="155" rx="80" ry="14" fill="#ff9ec5"/>
+        <!-- Middle tier -->
+        <rect x="50" y="118" width="120" height="40" rx="14" fill="#c9b8ff"/>
+        <ellipse cx="110" cy="118" rx="60" ry="11" fill="#ddd0ff"/>
+        <!-- Top tier -->
+        <rect x="70" y="90" width="80" height="32" rx="12" fill="#ffb347"/>
+        <ellipse cx="110" cy="90" rx="40" ry="9" fill="#ffd080"/>
+        <!-- Frosting drips bottom -->
+        <path d="M30 165 Q50 175 70 165 Q90 175 110 165 Q130 175 150 165 Q170 175 190 165" stroke="#fff9ff" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <!-- Frosting drips middle -->
+        <path d="M50 130 Q65 140 80 130 Q95 140 110 130 Q125 140 140 130 Q155 140 170 130" stroke="#fff9ff" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <!-- Frosting drips top -->
+        <path d="M70 102 Q82 110 95 102 Q108 110 121 102 Q134 110 148 102" stroke="#fff9ff" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+        <!-- Decorations bottom tier -->
+        <circle cx="65" cy="170" r="5" fill="#ffe566"/>
+        <circle cx="95" cy="173" r="4" fill="#7de8c8"/>
+        <circle cx="125" cy="173" r="4" fill="#ffe566"/>
+        <circle cx="155" cy="170" r="5" fill="#87ceeb"/>
+        <!-- Decorations middle -->
+        <circle cx="80" cy="135" r="4" fill="#ff7eb3"/>
+        <circle cx="110" cy="138" r="3.5" fill="#ffe566"/>
+        <circle cx="140" cy="135" r="4" fill="#7de8c8"/>
+        <!-- Candles -->
+        <g id="candleGroup">
+          <!-- Candle 1 -->
+          <rect x="84" y="66" width="10" height="26" rx="4" fill="#ff7eb3"/>
+          <rect x="84" y="66" width="10" height="8" rx="2" fill="#ff9ec5" opacity="0.5"/>
+          <!-- Flame 1 (unblown) -->
+          <g class="candle-flame unblown" id="flame1">
+            <ellipse cx="89" cy="61" rx="5" ry="7" fill="#ffe566"/>
+            <ellipse cx="89" cy="62" rx="2.5" ry="4" fill="#ffb347"/>
+            <ellipse cx="89" cy="58" rx="2" ry="2.5" fill="#fff5a0"/>
+          </g>
+          <!-- Star (blown) -->
+          <text class="blown" id="blown1" x="82" y="64" font-size="14">⭐</text>
+
+          <!-- Candle 2 -->
+          <rect x="105" y="60" width="10" height="32" rx="4" fill="#c9b8ff"/>
+          <rect x="105" y="60" width="10" height="9" rx="2" fill="#ddd0ff" opacity="0.5"/>
+          <g class="candle-flame unblown" id="flame2">
+            <ellipse cx="110" cy="55" rx="5" ry="7" fill="#ffe566"/>
+            <ellipse cx="110" cy="56" rx="2.5" ry="4" fill="#ffb347"/>
+            <ellipse cx="110" cy="52" rx="2" ry="2.5" fill="#fff5a0"/>
+          </g>
+          <text class="blown" id="blown2" x="103" y="58" font-size="14">⭐</text>
+
+          <!-- Candle 3 -->
+          <rect x="126" y="66" width="10" height="26" rx="4" fill="#7de8c8"/>
+          <rect x="126" y="66" width="10" height="8" rx="2" fill="#a0f0dc" opacity="0.5"/>
+          <g class="candle-flame unblown" id="flame3">
+            <ellipse cx="131" cy="61" rx="5" ry="7" fill="#ffe566"/>
+            <ellipse cx="131" cy="62" rx="2.5" ry="4" fill="#ffb347"/>
+            <ellipse cx="131" cy="58" rx="2" ry="2.5" fill="#fff5a0"/>
+          </g>
+          <text class="blown" id="blown3" x="124" y="64" font-size="14">⭐</text>
+        </g>
+        <!-- Stars on cake sides -->
+        <text x="38" y="180" font-size="12">✨</text>
+        <text x="172" y="178" font-size="12">✨</text>
+        <text x="58" y="145" font-size="10">🌸</text>
+        <text x="154" y="143" font-size="10">🌸</text>
+      </svg>
+      <p class="cake-hint" id="cakeHint">🌬️ Click to blow out the candles!</p>
+    </div>
+  </div>
+
+  <!-- Wish cards -->
+  <div class="cards">
+    <div class="card" onclick="cardPop(this)">
+      <span class="card-icon">🌸</span>
+      <div class="card-title">Beautiful Soul</div>
+      <p class="card-text">May your heart always bloom with joy, just like a cherry blossom in spring!</p>
+    </div>
+    <div class="card" onclick="cardPop(this)">
+      <span class="card-icon">⭐</span>
+      <div class="card-title">Shine Bright</div>
+      <p class="card-text">You're a star, Celeste! May this year be full of adventures that light up your world.</p>
+    </div>
+    <div class="card" onclick="cardPop(this)">
+      <span class="card-icon">🎁</span>
+      <div class="card-title">Endless Gifts</div>
+      <p class="card-text">May every single day bring you surprises, laughter, and all the good things you deserve!</p>
+    </div>
+  </div>
+
+  <!-- Message -->
+  <div class="message-section">
+    <div class="message-box">
+      <h2>🎀 A Special Note</h2>
+      <p class="message-text">
+        To the wonderful Celeste — today the whole universe is celebrating YOU! 🌙<br><br>
+        May your birthday be as bright as the stars, as sweet as cake, and as magical as your smile.
+        Here's to you and everything amazing that's coming your way! 🌈
+      </p>
+    </div>
+  </div>
+
+  <!-- Confetti button -->
+  <div class="btn-wrap">
+    <button class="confetti-btn" onclick="launchConfetti()">
+      🎊 Celebrate! 🎊
+    </button>
+  </div>
+</div>
+
+<script>
+  // --- Custom Cursor ---
+  const cursor = document.getElementById('cursor');
+  const sparkleEmojis = ['✨','⭐','🌸','💖','🎀','🌟','💫'];
+
+  document.addEventListener('mousemove', (e) => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+  });
+
+  document.addEventListener('click', (e) => {
+    for (let i = 0; i < 3; i++) {
+      const spark = document.createElement('div');
+      spark.className = 'sparkle';
+      spark.textContent = sparkleEmojis[Math.floor(Math.random() * sparkleEmojis.length)];
+      spark.style.left = (e.clientX + (Math.random()-0.5)*40) + 'px';
+      spark.style.top = (e.clientY + (Math.random()-0.5)*40) + 'px';
+      document.body.appendChild(spark);
+      setTimeout(() => spark.remove(), 900);
+    }
+  });
+
+  // --- Balloons ---
+  const balloonColors = ['#ff7eb3','#c9b8ff','#ffb347','#7de8c8','#ffe566','#87ceeb','#ff9ec5'];
+  const balloonContainer = document.getElementById('balloons');
+
+  function makeBalloon() {
+    const b = document.createElement('div');
+    b.className = 'balloon';
+    const color = balloonColors[Math.floor(Math.random() * balloonColors.length)];
+    b.style.background = `radial-gradient(circle at 35% 35%, ${color}cc, ${color})`;
+    b.style.left = Math.random() * 100 + 'vw';
+    b.style.animationDuration = (8 + Math.random() * 8) + 's';
+    b.style.animationDelay = (Math.random() * 6) + 's';
+    b.style.width = (45 + Math.random() * 30) + 'px';
+    b.style.height = (55 + Math.random() * 30) + 'px';
+    b.style.boxShadow = `inset -8px -8px 20px rgba(0,0,0,0.1), inset 4px 4px 10px rgba(255,255,255,0.4)`;
+    balloonContainer.appendChild(b);
+    const dur = parseFloat(b.style.animationDuration) * 1000 + parseFloat(b.style.animationDelay) * 1000;
+    setTimeout(() => { b.remove(); makeBalloon(); }, dur);
+  }
+
+  for (let i = 0; i < 10; i++) makeBalloon();
+
+  // --- Stars ---
+  const starsEl = document.getElementById('stars');
+  for (let i = 0; i < 40; i++) {
+    const star = document.createElement('div');
+    star.className = 'star';
+    star.style.left = Math.random() * 100 + 'vw';
+    star.style.top = Math.random() * 100 + 'vh';
+    star.style.animationDuration = (2 + Math.random() * 4) + 's';
+    star.style.animationDelay = (Math.random() * 4) + 's';
+    const size = 3 + Math.random() * 6;
+    star.style.width = star.style.height = size + 'px';
+    star.style.background = ['white','#ffe566','#ff9ec5','#c9b8ff'][Math.floor(Math.random()*4)];
+    starsEl.appendChild(star);
+  }
+
+  // --- Candle blow ---
+  let candlesBlown = false;
+  document.getElementById('cakeWrapper').addEventListener('click', () => {
+    if (candlesBlown) return;
+    candlesBlown = true;
+
+    ['flame1','flame2','flame3'].forEach((id, i) => {
+      setTimeout(() => {
+        const flame = document.getElementById(id);
+        flame.style.transition = 'opacity 0.3s';
+        flame.style.opacity = '0';
+        setTimeout(() => {
+          flame.classList.remove('unblown');
+          flame.classList.add('blown');
+          document.getElementById('blown' + (i+1)).classList.remove('blown');
+          document.getElementById('blown' + (i+1)).classList.add('blown-visible');
+        }, 300);
+      }, i * 200);
+    });
+
+    setTimeout(() => {
+      document.getElementById('cakeHint').textContent = '🌟 Wish made! Happy Birthday Celeste! 🌟';
+      launchConfetti();
+    }, 800);
+  });
+
+  // --- Card pop ---
+  function cardPop(el) {
+    el.style.transform = 'scale(1.1) rotate(2deg)';
+    setTimeout(() => el.style.transform = '', 400);
+    // mini confetti
+    const rect = el.getBoundingClientRect();
+    miniConfetti(rect.left + rect.width/2, rect.top);
+  }
+
+  function miniConfetti(x, y) {
+    const colors = ['#ff7eb3','#c9b8ff','#ffb347','#7de8c8','#ffe566'];
+    for (let i = 0; i < 12; i++) {
+      const piece = document.createElement('div');
+      piece.className = 'confetti-piece';
+      piece.style.left = x + 'px';
+      piece.style.top = y + 'px';
+      piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+      piece.style.animationDuration = (0.8 + Math.random() * 0.8) + 's';
+      piece.style.transform = `translateX(${(Math.random()-0.5)*120}px)`;
+      document.body.appendChild(piece);
+      setTimeout(() => piece.remove(), 1600);
+    }
+  }
+
+  // --- Big confetti ---
+  function launchConfetti() {
+    const colors = ['#ff7eb3','#c9b8ff','#ffb347','#7de8c8','#ffe566','#87ceeb','#ff5fa0','#60d0ff'];
+    const shapes = ['circle', 'rect', 'star'];
+    for (let i = 0; i < 80; i++) {
+      setTimeout(() => {
+        const piece = document.createElement('div');
+        piece.className = 'confetti-piece';
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        const size = 6 + Math.random() * 12;
+        piece.style.left = (10 + Math.random() * 80) + 'vw';
+        piece.style.top = '-20px';
+        piece.style.width = size + 'px';
+        piece.style.height = size + 'px';
+        piece.style.background = color;
+        piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+        piece.style.animationDuration = (1.5 + Math.random() * 1.5) + 's';
+        piece.style.transform = `translateX(${(Math.random()-0.5)*200}px)`;
+        document.body.appendChild(piece);
+        setTimeout(() => piece.remove(), 3200);
+      }, i * 25);
+    }
+
+    // Emoji burst
+    const celebEmojis = ['🎉','🎊','🌟','💖','🎈','✨','🌸','🎀'];
+    for (let i = 0; i < 12; i++) {
+      setTimeout(() => {
+        const em = document.createElement('div');
+        em.className = 'sparkle';
+        em.textContent = celebEmojis[Math.floor(Math.random() * celebEmojis.length)];
+        em.style.left = (10 + Math.random() * 80) + 'vw';
+        em.style.top = (10 + Math.random() * 60) + 'vh';
+        em.style.fontSize = (20 + Math.random() * 20) + 'px';
+        em.style.animationDuration = '1.2s';
+        document.body.appendChild(em);
+        setTimeout(() => em.remove(), 1300);
+      }, i * 80);
+    }
+  }
+
+  // Auto-launch a small confetti on load
+  setTimeout(() => launchConfetti(), 1200);
+</script>
+</body>
+</html>
